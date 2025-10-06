@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Library Management Platform</title>
+    <link rel="stylesheet" href="nlms.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Header with Librarian Login Button (Top Left) and Logo (Center) -->
+    <header>
+        <button id="librarianLoginBtn" class="top-left-btn">Librarian Login</button>
+        <div class="logo">
+            <img src="images__1_-removebg-preview.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="logo-fallback"></span>
+        </div>
+    </header>
+
+    <!-- Sections (Student Reg is default active) -->
+    <div id="studentRegScreen" class="section active">
+        <h2>Student Registration</h2>
+        <form id="studentRegForm">
+            <label for="studentFirstname">First Name</label>
+            <input type="text" id="studentFirstname" placeholder="First Name" required autocomplete="given-name">
+            
+            <label for="studentLastname">Last Name</label>
+            <input type="text" id="studentLastname" placeholder="Last Name" required autocomplete="family-name">
+            
+            <label for="studentSection">Section</label>
+            <input type="text" id="studentSection" placeholder="Section (e.g., 12 - Del Mundo)" required>
+            
+            <label for="studentAdviser">Adviser</label>
+            <input type="text" id="studentAdviser" placeholder="Adviser" required>
+            
+            <label for="studentContact">Contact Number</label>
+            <input type="tel" id="studentContact" placeholder="Contact Number" required>
+            
+            <label for="studentImage">Image URL (optional)</label>
+            <input type="url" id="studentImage" placeholder="Image URL (optional)">
+            
+            <button type="submit">Register Student</button>
+        </form>
+        <div id="studentRegMessage"></div>
+    </div>
+
+    <div id="loginScreen" class="section">
+        <h2>Librarian Login</h2>
+        <form id="loginForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Username" required autocomplete="username">
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+            
+            <button type="submit">Login</button>
+        </form>
+        <div id="loginError" class="error"></div>
+        <button id="passwordRecoveryBtn" type="button">Forgot Password?</button>
+    </div>
+
+    <!-- Password Recovery Screen -->
+    <div id="passwordRecoveryScreen" class="section">
+        <h2>Password Recovery</h2>
+        <form id="recoveryForm">
+            <label for="recoveryEmail">Enter Email</label>
+            <input type="email" id="recoveryEmail" placeholder="Enter Email" required autocomplete="email">
+            <button type="submit">Send Recovery Link</button>
+        </form>
+        <div id="recoveryMessage"></div>
+        <button id="backToLoginBtn" type="button">Back to Login</button>
+    </div>
+
+    <!-- Dashboard (Librarian Only) -->
+    <div id="dashboardScreen" class="section">
+        <h2>Librarian Dashboard</h2>
+        <button id="viewStudentsBtn" type="button">View Students</button>
+        <button id="btnIssueBook" type="button">Issue Book (RFID Scan)</button>
+        <button id="btnLogout" type="button">Logout</button>
+
+        <!-- Students List (Visible to Librarian) -->
+        <div id="studentsList">
+            <h3>Registered Students</h3>
+            <div class="table-container">
+                <table id="studentsTable">
+                    <thead>
+                        <tr>
+                            <th>RFID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Section</th>
+                            <th>Adviser</th>
+                            <th>Contact</th>
+                            <th>Actions</th> <!-- Placeholder for future edit/delete -->
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Issue Screen -->
+    <div id="bookIssueScreen" class="section">
+        <h2>Issue Book - Scan RFID</h2>
+        <label for="RFIDCARD">Scan/Enter RFID Card Number</label>
+        <input type="text" id="RFIDCARD" placeholder="Scan/Enter RFID Card Number" autofocus>
+        <div id="error" class="error"></div>
+        <div id="studentInfo">
+            <img id="img" src="" alt="Student Image" onerror="this.src='https://cdn-icons-png.flaticon.com/512/565/565547.png'">
+            <div class="info-row">
+                <span class="label">First Name:</span>
+                <span id="fname" class="value"></span>
+            </div>
+            <div class="info-row">
+                <span class="label">Last Name:</span>
+                <span id="lname" class="value"></span>
+            </div>
+            <div class="info-row">
+                <span class="label">Section:</span>
+                <span id="section" class="value"></span>
+            </div>
+            <div class="info-row">
+                <span class="label">Adviser:</span>
+                <span id="adviser" class="value"></span>
+            </div>
+            <div class="info-row">
+                <span class="label">Contact:</span>
+                <span id="contact" class="value"></span>
+            </div>
+        </div>
+        <button id="backToDashboardFromIssue" type="button">Back to Dashboard</button>
+    </div>
+
+    <script src="nlms.js"></script>
+</body>
+</html>
